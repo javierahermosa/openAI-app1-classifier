@@ -3,9 +3,6 @@ This program uses the OPENAI API to classify news articles and obtain the answer
 """
 
 from openai import OpenAI
-import openai
-import os
-
 
 def api_call(_prompt, _article):
     client = OpenAI()
@@ -20,11 +17,12 @@ def api_call(_prompt, _article):
         temperature=0
     )
 
-    response = completion.choices[0].message.content
-    return response
+    _response = completion.choices[0].message.content
+    return _response
 
 
 if __name__ == '__main__':
+
     # Use this prompt to extract a topic from the article, from a list of preset topics.
     prompt = "You are a text classifier. Your response should be a single word describing the topic of the article." \
              "The topic can be either sports, finance, mortgages, sustainability, pensions, investing. " \
@@ -70,6 +68,7 @@ if __name__ == '__main__':
 
     article_unknown = "what are you talking about?"
 
+    # Use this prompt to extract a topic, summary and tags for an article with a JSON format response.
     prompt_json = "You are a text classifier, and your response should have three elements including the " \
                   "topic of the article, a summary of the article, and a set of tags suitable to the article. " \
                   "The topic can be either sports, financial expertise, mortgages, sustainability, pension, " \
